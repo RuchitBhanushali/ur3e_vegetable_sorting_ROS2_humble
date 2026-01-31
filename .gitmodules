@@ -1,0 +1,3 @@
+[submodule "src/ros_vegetable_detection"]
+	path = src/ros_vegetable_detection
+	url = https://github.com/KaungSettThu/ros_vegetable_detection.git
