@@ -1,0 +1,62 @@
+ur3e_pick_place_mtc:
+  ros__parameters:
+    use_sim_time: true
+
+    # Groups / frames
+    arm_group: ur_arm
+    gripper_group: gripper
+    gripper_open_state: open
+    gripper_closed_state: closed
+
+    eef_frame: robotiq_base_link
+    world_frame: base_link
+
+    # TCP offset along +Z of eef_frame (meters)
+    tcp_offset_z: 0.244
+
+    # Scene objects
+    cube_id: pick_cube
+    cube_x: 0.25
+    cube_y: 0.7
+    cube_z: 0.05
+    cube_size_x: 0.04
+    cube_size_y: 0.04
+    cube_size_z: 0.04
+
+    bin_id: place_bin
+    bin_x: -0.50
+    bin_y: 0.40
+    bin_z: 0.05
+    bin_size_x: 0.20
+    bin_size_y: 0.20
+    bin_size_z: 0.10
+
+    # Target TCP heights
+    pregrasp_z: 0.20
+    preplace_z: 0.25
+
+    # Planning
+    execute: true
+    max_solutions: 1
+
+    # Cartesian
+    cart_step_size: 0.002
+    cart_vel_scale: 0.2
+    cart_acc_scale: 0.2
+
+    # Distances
+    approach_min: 0.01
+    approach_max: 0.12
+    lift_min: 0.10
+    lift_max: 0.18
+    lower_min: 0.01
+    lower_max: 0.16
+    retreat_min: 0.10
+    retreat_max: 0.18
+
+    # Directions (tool-relative)
+    approach_dir_z: -1.0
+    retreat_dir_z:  1.0
+
+    # State wait
+    state_timeout: 30.0

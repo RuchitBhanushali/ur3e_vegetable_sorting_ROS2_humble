@@ -1,0 +1,170 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="peg_in_hole_demo">
+
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <gravity>0 0 -9.81</gravity>
+    </physics>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
+    </include>
+
+    <!-- Table (top surface at z = 0.75) -->
+    <model name="table">
+      <static>true</static>
+      <pose>0 0 0.375 0 0 0</pose>
+      <link name="link">
+        <collision name="col">
+          <geometry>
+            <box><size>1.2 0.8 0.75</size></box>
+          </geometry>
+        </collision>
+        <visual name="vis">
+          <geometry>
+            <box><size>1.2 0.8 0.75</size></box>
+          </geometry>
+          <material>
+            <ambient>0.35 0.22 0.12 1</ambient>
+            <diffuse>0.55 0.34 0.18 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Real square hole made from 4 static walls (a cavity). -->
+    <!-- Hole center at (0.35, -0.15) on table top.
+         Peg is 30mm x 30mm, hole inner is ~36mm x 36mm (clearance). -->
+    <model name="hole_block">
+      <static>true</static>
+      <pose>0.30 0.20 0.75 0 0 0</pose>
+
+      <link name="link">
+        <!-- Parameters (encoded as numbers):
+             wall thickness t=0.02
+             inner half = 0.018  (inner opening = 0.036)
+             outer half = 0.038  (outer size = 0.076)
+             wall center offset = inner_half + t/2 = 0.028
+             wall height = 0.06 (stands 6cm above table) -->
+
+        <!-- +X wall -->
+        <collision name="col_px">
+          <pose>0.028 0 0.03 0 0 0</pose>
+          <geometry><box><size>0.02 0.076 0.06</size></box></geometry>
+        </collision>
+        <visual name="vis_px">
+          <pose>0.028 0 0.03 0 0 0</pose>
+          <geometry><box><size>0.02 0.076 0.06</size></box></geometry>
+          <material>
+            <ambient>0.08 0.45 0.08 1</ambient>
+            <diffuse>0.10 0.85 0.10 1</diffuse>
+            <specular>0.03 0.03 0.03 1</specular>
+          </material>
+        </visual>
+
+        <!-- -X wall -->
+        <collision name="col_nx">
+          <pose>-0.028 0 0.03 0 0 0</pose>
+          <geometry><box><size>0.02 0.076 0.06</size></box></geometry>
+        </collision>
+        <visual name="vis_nx">
+          <pose>-0.028 0 0.03 0 0 0</pose>
+          <geometry><box><size>0.02 0.076 0.06</size></box></geometry>
+          <material>
+            <ambient>0.08 0.45 0.08 1</ambient>
+            <diffuse>0.10 0.85 0.10 1</diffuse>
+            <specular>0.03 0.03 0.03 1</specular>
+          </material>
+        </visual>
+
+        <!-- +Y wall -->
+        <collision name="col_py">
+          <pose>0 0.028 0.03 0 0 0</pose>
+          <geometry><box><size>0.076 0.02 0.06</size></box></geometry>
+        </collision>
+        <visual name="vis_py">
+          <pose>0 0.028 0.03 0 0 0</pose>
+          <geometry><box><size>0.076 0.02 0.06</size></box></geometry>
+          <material>
+            <ambient>0.08 0.45 0.08 1</ambient>
+            <diffuse>0.10 0.85 0.10 1</diffuse>
+            <specular>0.03 0.03 0.03 1</specular>
+          </material>
+        </visual>
+
+        <!-- -Y wall -->
+        <collision name="col_ny">
+          <pose>0 -0.028 0.03 0 0 0</pose>
+          <geometry><box><size>0.076 0.02 0.06</size></box></geometry>
+        </collision>
+        <visual name="vis_ny">
+          <pose>0 -0.028 0.03 0 0 0</pose>
+          <geometry><box><size>0.076 0.02 0.06</size></box></geometry>
+          <material>
+            <ambient>0.08 0.45 0.08 1</ambient>
+            <diffuse>0.10 0.85 0.10 1</diffuse>
+            <specular>0.03 0.03 0.03 1</specular>
+          </material>
+        </visual>
+
+        <!-- Optional: thin top plate around hole for nicer look -->
+        <collision name="col_plate">
+          <pose>0 0 0.005 0 0 0</pose>
+          <geometry><box><size>0.10 0.10 0.01</size></box></geometry>
+        </collision>
+        <visual name="vis_plate">
+          <pose>0 0 0.005 0 0 0</pose>
+          <geometry><box><size>0.10 0.10 0.01</size></box></geometry>
+          <material>
+            <ambient>0.05 0.25 0.05 1</ambient>
+            <diffuse>0.06 0.45 0.06 1</diffuse>
+            <specular>0.02 0.02 0.02 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Square peg (dynamic). 30mm x 30mm x 100mm -->
+    <!-- If you want it to start resting on table, keep z = 0.80 (0.75 + 0.05). -->
+    <model name="peg">
+      <static>false</static>
+      <pose>0.10 0.20 0.80 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>0.05</mass>
+          <inertia>
+            <ixx>1e-4</ixx><iyy>1e-4</iyy><izz>1e-4</izz>
+            <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="col">
+          <geometry>
+            <box>
+              <size>0.03 0.03 0.13</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="vis">
+          <geometry>
+            <box>
+              <size>0.03 0.03 0.13</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.75 0.60 0.05 1</ambient>
+            <diffuse>0.95 0.80 0.10 1</diffuse>
+            <specular>0.08 0.08 0.08 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro"/>
+  <xacro:include filename="$(find ur_description)/urdf/ur.ros2_control.xacro"/>
+  <xacro:include filename="$(find robotiq_description)/urdf/robotiq_2f_140_macro.urdf.xacro"/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro"/>
+  
+  <xacro:macro name="ur3e_with_gripper" params="
+      parent
+      *origin
+      ur_type
+      joint_limits_parameters_file
+      kinematics_parameters_file
+      physical_parameters_file
+      visual_parameters_file
+      use_fake_hardware
+      sim_gazebo
+      sim_ignition
+      safety_limits
+      ">
+
+    <xacro:ur_robot
+      name="${ur_type}"
+      tf_prefix="${ur_type}_"
+      parent="${parent}"  
+      joint_limits_parameters_file="${joint_limits_parameters_file}"
+      kinematics_parameters_file="${kinematics_parameters_file}"
+      physical_parameters_file="${physical_parameters_file}"
+      visual_parameters_file="${visual_parameters_file}"
+    
+      use_fake_hardware="${use_fake_hardware}"
+      sim_gazebo="${sim_gazebo}"
+      sim_ignition="${sim_ignition}"
+      safety_limits="${safety_limits}"
+      >
+      <xacro:insert_block name="origin"/> 
+    </xacro:ur_robot>
+
+    <xacro:robotiq_gripper
+      name="robotiq_gripper"
+      prefix="robotiq_"
+      parent="${ur_type}_tool0"
+      use_fake_hardware="${use_fake_hardware}"
+      >
+      <origin xyz="0 0 0" rpy="0 0 0"/> 
+    </xacro:robotiq_gripper>
+
+    <xacro:sensor_d435i
+      parent="${ur_type}_tool0"
+      name="camera"
+      use_nominal_extrinsics="false"
+      >
+      <origin xyz="0 0.035 0" rpy="${-pi/2} ${-pi/2} 0"/> 
+    </xacro:sensor_d435i>
+
+  </xacro:macro>
+</robot>

@@ -1,0 +1,144 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="pick_place_table_world">
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
+    </include>
+
+    <!-- Cube (0.04m) placed ON ground: center z = 0.02 -->
+    <model name="pick_cube">
+      <pose>-0.13 0.37 0.05 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>1e-4</ixx>
+            <iyy>1e-4</iyy>
+            <izz>1e-4</izz>
+          </inertia>
+        </inertial>
+
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.04 0.04 0.04</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.04 0.04 0.04</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>
+    <!-- Bin: floor sits ON ground, walls centered at z=0.05 -->
+    <!-- <model name="bin">
+      <pose>-0.4 0.2 0 0 0 0</pose>
+
+      <link name="link">
+
+        Floor: thickness 0.01 => center z = 0.005
+        <collision name="base_collision">
+          <pose>0 0 0.005 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.01</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="base_visual">
+          <pose>0 0 0.005 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.01</size>
+            </box>
+          </geometry>
+        </visual>
+
+        <!-- Walls: height 0.10 => center z=0.05 -->
+        <collision name="wall_nx_collision">
+          <pose>-0.095 0 0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.2 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="wall_nx_visual">
+          <pose>-0.095 0 0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.2 0.1</size>
+            </box>
+          </geometry>
+        </visual>
+
+        <collision name="wall_px_collision">
+          <pose>0.095 0 0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.2 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="wall_px_visual">
+          <pose>0.095 0 0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.2 0.1</size>
+            </box>
+          </geometry>
+        </visual>
+
+        <collision name="wall_ny_collision">
+          <pose>0 -0.095 0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.01 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="wall_ny_visual">
+          <pose>0 -0.095 0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.01 0.1</size>
+            </box>
+          </geometry>
+        </visual>
+
+        <collision name="wall_py_collision">
+          <pose>0 0.095 0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.01 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+
+        <visual name="wall_py_visual">
+          <pose>0 0.095 0.05 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.2 0.01 0.1</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+    </model> -->
+
+

@@ -1,0 +1,29 @@
+repositories:
+  src/IFRA_LinkAttacher:
+    type: git
+    url: https://github.com/IFRA-Cranfield/IFRA_LinkAttacher.git
+    version: b056289ba93ccb549db98926dcbb9679642d0c8d
+  src/Universal_Robots_ROS2_Description:
+    type: git
+    url: https://github.com/UniversalRobots/Universal_Robots_ROS2_Description.git
+    version: 198b5dfad8abc34963fd6afa2ba799fe9c4c6787
+  src/moveit_task_constructor:
+    type: git
+    url: https://github.com/moveit/moveit_task_constructor.git
+    version: 756634951326ae17ae099882f7110c6f1d0a98c0
+  src/realsense-ros:
+    type: git
+    url: https://github.com/realsenseai/realsense-ros.git
+    version: 1d49b365615f4982048e574c37c3363305fadbaf
+  src/ros2_robotiq_gripper:
+    type: git
+    url: https://github.com/PickNikRobotics/ros2_robotiq_gripper.git
+    version: 12e623212e6891a5fcc9af94d67b07e640916394
+  src/rviz:
+    type: git
+    url: https://github.com/ros2/rviz.git
+    version: 842f75907af36e1c3f169f29638cd793523f8563
+  src/serial-ros2:
+    type: git
+    url: https://github.com/jannishaberhausen/serial-ros2.git
+    version: 3fd8bd0fcb6cfd2bd6d5268fc3b33859e4182f6a

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ur">
+
+  <!-- ===================== -->
+  <!-- Arguments -->
+  <!-- ===================== -->
+  <xacro:arg name="name" default="ur"/>
+  <xacro:arg name="ur_type" default="ur3e"/>
+  <xacro:arg name="simulation_controllers" default=""/>
+
+  <!-- REQUIRED by ur3e_robotiq_macro -->
+  <xacro:arg name="joint_limits_parameters_file"
+             default="$(find ur_description)/config/ur3e/joint_limits.yaml"/>
+  <xacro:arg name="kinematics_parameters_file"
+             default="$(find ur_description)/config/ur3e/default_kinematics.yaml"/>
+  <xacro:arg name="physical_parameters_file"
+             default="$(find ur_description)/config/ur3e/physical_parameters.yaml"/>
+  <xacro:arg name="visual_parameters_file"
+             default="$(find ur_description)/config/ur3e/visual_parameters.yaml"/>
+
+  <xacro:arg name="use_fake_hardware" default="false"/>
+  <xacro:arg name="sim_gazebo" default="false"/>
+  <xacro:arg name="sim_ignition" default="true"/>
+  <xacro:arg name="safety_limits" default="true"/>
+
+  <!-- ===================== -->
+  <!-- Includes -->
+  <!-- ===================== -->
+  <xacro:include
+    filename="$(find ur3e_robotiq_description)/urdf/ur3e_robotiq_macro.xacro"/>
+
+  <xacro:include
+    filename="$(find ur3e_robotiq_gz_sim)/urdf/ur3e_ros2_control.xacro"/>
+
+  <!-- ===================== -->
+  <!-- World -->
+  <!-- ===================== -->
+  <link name="world"/>
+
+  <!-- ===================== -->
+  <!-- Robot (UR3e + Robotiq) -->
+  <!-- NOTE: NO name, NO tf_prefix -->
+  <!-- ===================== -->
+  <xacro:ur3e_with_gripper
+    parent="world"
+    ur_type="$(arg ur_type)"
+
+    joint_limits_parameters_file="$(arg joint_limits_parameters_file)"
+    kinematics_parameters_file="$(arg kinematics_parameters_file)"
+    physical_parameters_file="$(arg physical_parameters_file)"
+    visual_parameters_file="$(arg visual_parameters_file)"
+
+    use_fake_hardware="$(arg use_fake_hardware)"
+    sim_gazebo="$(arg sim_gazebo)"
+    sim_ignition="$(arg sim_ignition)"
+    safety_limits="$(arg safety_limits)"
+  >
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:ur3e_with_gripper>
+
+  <!-- ===================== -->
+  <!-- Gazebo ros2_control (HUMBLE) -->
+  <!-- ===================== -->
+  <gazebo>
+    <plugin
+      filename="libgz_ros2_control-system.so"
+      name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(arg simulation_controllers)</parameters>
+    </plugin>
+  </gazebo>
+
+
+</robot>

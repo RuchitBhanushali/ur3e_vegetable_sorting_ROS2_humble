@@ -1,0 +1,53 @@
+# =========================
+# colcon
+# =========================
+build/
+install/
+log/
+
+# =========================
+# Python / OS
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.vscode/
+.idea/
+
+# =========================
+# Never commit nested repos
+# =========================
+**/.git/
+
+# =========================
+# THIRD PARTY ROS REPOS
+# =========================
+src/Universal_Robots_ROS2_Description/
+src/IFRA_LinkAttacher/
+src/ros2_robotiq_gripper/
+src/serial-ros2/
+src/rviz/
+src/moveit_task_constructor/
+src/realsense-ros/
+src/robotiq_140_gz_test
+
+# Catch-all vendor
+src/**/vendor/
+src/**/third_party/
+
+# =========================
+# Local test / debug files
+# =========================
+MOUNT_TEST*.txt
+frames_*.gv
+frames_*.pdf
+*.gv
+*.pdf
+
+# =========================
+# Security / keys
+# =========================
+*.gpg
+*.key
+*.pem
