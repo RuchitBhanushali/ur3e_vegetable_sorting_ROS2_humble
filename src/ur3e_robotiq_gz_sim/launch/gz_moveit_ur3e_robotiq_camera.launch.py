@@ -1,12 +1,3 @@
-# gz_moveit_ur3e_robotiq_camera.launch.py
-#
-# Single-file launch (no reuse of your other launch files):
-# - Starts Gazebo Sim via ros_gz_sim/gz_sim.launch.py (GUI on/off)
-# - Spawns robot via ros_gz_sim/create using "-string <xacro output>" (same pattern as your working spawn)
-# - Spawns controllers EXACTLY like your working file (same controller-manager args)
-# - Starts MoveIt move_group + MoveIt RViz using configs from moveit_config pkg
-# - Forces use_sim_time = True everywhere
-#
 # Requirements:
 # - moveit_config package exists and contains:
 #   config/ur.srdf
