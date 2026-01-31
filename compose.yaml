@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  ros2:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: ur3e_ros2_humble
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - ROS_DOMAIN_ID=0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    stdin_open: true
+    tty: true
