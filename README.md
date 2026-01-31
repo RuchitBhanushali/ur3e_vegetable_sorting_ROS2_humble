@@ -211,11 +211,11 @@ This keeps the repository clean and reproducible.
 ### Collaboration
 
 - Manipulation, simulation, MoveIt 2, Docker integration
-- Ruchit Bhanushali
+    Ruchit Bhanushali
 
 - Vegetable detection & depth perception
-- Kaung Sett Thu
-(included as a Git submodule)
+    Kaung Sett Thu
+    (included as a Git submodule)
 
 ### Notes
 
